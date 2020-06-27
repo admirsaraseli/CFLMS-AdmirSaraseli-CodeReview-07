@@ -1,0 +1,79 @@
+<p class="col-sm-4 h4 mb-4 text-info shadow" *ngIf="total > 0">The packages that you want to buy:</p>
+<div class="container row row-cols-1 row-cols-md-3">
+	<div class="col mb-4" *ngFor="let item of items;let i=index">
+		<div class="card px-1 py-1" >
+			<img src="assets/img/{{item.image}}" class="card-img-top" alt="...">
+			<div class="card-body">
+				<p class="card-title font-weight-bold">{{ item.destination }}</p>
+				<h4 class="card-text">{{ item.price | currency }}, <span class = "text-info ml-3" >Journey: {{item.duration}}</span></h4>
+			</div>
+			<div class="card-footer">
+				<button class="btn btn-outline-danger btn-block my-2 my-sm-0" (click)="deleteItem(i)">
+					Remove
+				</button>
+			</div>	
+		</div>
+	</div>
+</div>
+
+<div >
+    <ng-template [ngIf]="discount == 0" [ngIfElse]="none">
+        <h2 class="col-sm-3 text-dark shadow p-1 bg-light"> Total price: {{total | currency}} 
+        </h2>
+    </ng-template>
+    <ng-template #none>
+        <h2 class="col-sm-4 text-dark shadow p-1 bg-light"><del>{{total | currency}}</del> Total price: {{total-discount | currency}} <small class="text-danger"> -({{percentage}}%) </small></h2>
+    </ng-template>
+</div>
+
+<div class="container mx-auto mt-4 bg-transparent px-4 py-4">
+	<form class="border-1" [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm.value)">
+		<div class="form-row mb-4 mx-auto justify-content-center">
+			<div class="col-sm-4">
+				<label class="font-weight-bold">First Name:</label>
+				<input class="form-control shadow" type="text" formControlName="firstName">
+		 	</div>
+		 	<div class="col-sm-4">
+				<label class="font-weight-bold">Last Name:</label>
+				<input class="form-control shadow" type="text" formControlName="lastName">
+			</div>
+		</div>	
+		<div class="form-row mb-4 mx-auto justify-content-center">
+			<div class="col-sm-4">	
+	    		<label class="font-weight-bold">Email:</label>
+				<input class="form-control shadow" type="email" formControlName="email">
+			</div>
+			<div class="col-sm-4">
+				<label class="font-weight-bold">Phone Number:</label>
+				<input class="form-control shadow" type="text" formControlName="telnumber">
+			</div>
+		</div>
+		<div class="form-row mb-4 mx-auto justify-content-center">
+			<div class="col-sm-8">
+				<label class="font-weight-bold ">Address:</label>
+				<input class="form-control shadow" type="text" formControlName="address">
+			</div>
+		</div>	
+		<div class="form-row mb-4 mx-auto justify-content-center">
+			<div class="col-sm-8">
+				<label class="font-weight-bold">Your message:</label>
+				<textarea class="form-control shadow" type="text" formControlName="description"></textarea>
+			</div>
+		</div>
+		<div class="form-row mb-4 mx-auto justify-content-center">
+			<div class="form-check col-sm-7">
+				<input class="form-check-input shadow " type="checkbox" value="" id="agree" required formControlName="agree">
+				<label class="form-check-label font-weight-bold" for="agree">
+					Agree to terms and conditions
+				</label>
+				<div class="invalid-feedback font-weight-bold">
+					You must agree before submitting.
+				</div>
+			</div>
+		</div>
+		<div class="form-row mb-4 mx-auto justify-content-center">
+			<input  type="submit" class="btn btn-info btn-lg shadow p-3" value="Submit your data">
+		</div>
+	</form>
+</div>
+

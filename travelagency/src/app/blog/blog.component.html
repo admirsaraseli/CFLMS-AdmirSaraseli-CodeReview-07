@@ -1,0 +1,15 @@
+<div class="container row row-cols-1 row-cols-md-3 mx-auto">
+	<div class="col mb-4" *ngFor="let blog of blogs">
+		<div class="card px-1 py-1" >
+			<img src="assets/img/{{blog.image}}" class="card-img-top" alt="...">
+			<div class="card-body">
+				<p class="card-title font-weight-bold">{{ blog.name }}</p>
+			</div>
+			<div class="card-footer text-center">
+                <span class="text-muted"> From Admir: {{ blog.date }}
+					<span class="bv-rating-stars-on bv-rating-stars bv-width-from-rating-stats-90 ml-2" aria-hidden="true">★★★★★</span>
+				</span>
+			</div>
+		</div>
+	</div>
+</div>
